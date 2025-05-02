@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - 'Q-TRANSFORM-issue-*'
+  pull-request:
+    branches:
+      - 'Q-TRANSFORM-issue-*'
 
 env:
    MAVEN_CLI_OPTS: >-
