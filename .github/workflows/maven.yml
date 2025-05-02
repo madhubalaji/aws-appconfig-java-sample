@@ -6,7 +6,8 @@ on:
       - 'Q-TRANSFORM-issue-*'
 
 env:
-  java.version : 1.8
+   MAVEN_CLI_OPTS: >-
+     -Djava.version=${{ github.ref_name != null && startsWith(github.ref_name, 'Q-TRANSFORM-issue-*') && github.event_name == 'pull_request' && '17' || '1.8' }}
 jobs:
   q-code-transformation:
     runs-on: ubuntu-latest
