@@ -5,6 +5,8 @@ on:
     branches:
       - 'Q-TRANSFORM-issue-*'
 
+env:
+  java.version : 1.8
 jobs:
   q-code-transformation:
     runs-on: ubuntu-latest
