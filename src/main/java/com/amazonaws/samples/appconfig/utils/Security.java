@@ -1,7 +1,7 @@
 //javax.security.cert to java.security.cert classes migration
 package com.amazonaws.samples.appconfig.utils;
 
-import javax.security.cert.*;
+import java.security.cert.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

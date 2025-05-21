@@ -6,7 +6,7 @@ buildscript {
       mavenCentral()
     }
     dependencies {
-        classpath('org.springframework.boot:spring-boot-gradle-plugin:2.3.0.RELEASE')
+        classpath('org.springframework.boot:spring-boot-gradle-plugin:2.7.14')
     }
 }
 
@@ -23,16 +23,20 @@ repositories {
     mavenCentral()
 }
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+sourceCompatibility = 17
+targetCompatibility = 17
 
 
 dependencies {
-    compile("org.springframework.boot:spring-boot-starter-web") 
-    testCompile("org.springframework.boot:spring-boot-starter-test")
-    implementation platform('software.amazon.awssdk:bom:2.14.27')
+    implementation("org.springframework.boot:spring-boot-starter-web") 
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
+    implementation platform('software.amazon.awssdk:bom:2.20.56')
     implementation 'software.amazon.awssdk:appconfig'
-    compile("org.json:json:20200518")
-    testImplementation group: 'junit', name: 'junit', version: '4.11'
+    implementation("org.json:json:20200518")
+    implementation("org.apache.logging.log4j:log4j-api:2.20.0")
+    implementation("org.apache.logging.log4j:log4j-core:2.20.0")
+    testImplementation("junit:junit:4.13.2")
+    testImplementation("org.mockito:mockito-core:4.11.0")
+    implementation("jakarta.validation:jakarta.validation-api:3.0.2")
 }
 
