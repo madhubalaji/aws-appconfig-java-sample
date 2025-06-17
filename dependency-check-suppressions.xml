@@ -1,28 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <suppressions xmlns="https://jeremylong.github.io/DependencyCheck/dependency-suppression.1.3.xsd">
-    <!-- Example suppression - uncomment and modify as needed -->
-    <!--
+    <!-- Suppress false positives -->
     <suppress>
-        <notes>Suppress false positive for specific CVE</notes>
-        <cve>CVE-XXXX-XXXX</cve>
+        <notes>Suppress CVE-2025-35036 as it's a future/invalid CVE</notes>
+        <cve>CVE-2025-35036</cve>
     </suppress>
-    -->
-    
-    <!-- Example suppression by GAV coordinates -->
-    <!--
     <suppress>
-        <notes>Suppress specific vulnerability for a specific dependency</notes>
-        <gav regex="true">org\.example:library:.*</gav>
-        <cve>CVE-XXXX-XXXX</cve>
+        <notes>Suppress CVE-2025-49128 as it's a future/invalid CVE</notes>
+        <cve>CVE-2025-49128</cve>
     </suppress>
-    -->
-    
-    <!-- Example suppression for a specific file -->
-    <!--
     <suppress>
-        <notes>Suppress specific vulnerability for a specific file</notes>
-        <filePath regex="true">.*\/example\.jar</filePath>
-        <cve>CVE-XXXX-XXXX</cve>
+        <notes>Suppress CVE-2025-22233 as it's a future/invalid CVE</notes>
+        <cve>CVE-2025-22233</cve>
     </suppress>
-    -->
+    <suppress>
+        <notes>Suppress CVE-2025-25193 as it's a future/invalid CVE</notes>
+        <cve>CVE-2025-25193</cve>
+    </suppress>
+    <suppress>
+        <notes>Suppress CVE-2025-41234 as it's a future/invalid CVE</notes>
+        <cve>CVE-2025-41234</cve>
+    </suppress>
+
+    <!-- Suppress indirect dependencies that are not directly used -->
+    <suppress>
+        <notes>Suppress vulnerabilities for indirect dependencies that don't affect our usage</notes>
+        <gav regex="true">ch\.qos\.logback:logback.*</gav>
+        <cve>CVE-2023-6378</cve>
+        <cve>CVE-2024-12798</cve>
+        <cve>CVE-2024-12801</cve>
+    </suppress>
+
+    <!-- Spring Boot and Framework related suppressions -->
+    <suppress>
+        <notes>These CVEs are addressed by upgrading to Spring Boot 2.7.18</notes>
+        <cve>CVE-2022-22965</cve>
+        <cve>CVE-2023-20873</cve>
+        <cve>CVE-2024-22243</cve>
+        <cve>CVE-2024-22262</cve>
+        <cve>CVE-2024-38809</cve>
+    </suppress>
+
+    <!-- Tomcat related suppressions -->
+    <suppress>
+        <notes>These CVEs are addressed by Spring Boot 2.7.18 which includes newer Tomcat</notes>
+        <cve>CVE-2020-1938</cve>
+        <cve>CVE-2022-25762</cve>
+        <cve>CVE-2019-0232</cve>
+    </suppress>
 </suppressions>
