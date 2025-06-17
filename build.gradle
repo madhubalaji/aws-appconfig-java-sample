@@ -7,6 +7,10 @@ buildscript {
     }
     dependencies {
         classpath('org.springframework.boot:spring-boot-gradle-plugin:2.3.0.RELEASE')
+        classpath('org.owasp:dependency-check-gradle:8.4.0')
+        classpath('org.cyclonedx:cyclonedx-gradle-plugin:1.7.4')
+        classpath('com.github.spotbugs.snom:spotbugs-gradle-plugin:5.0.14')
+        classpath('gradle.plugin.com.github.spotbugs.snom:spotbugs-gradle-plugin:5.0.14')
     }
 }
 
@@ -15,9 +19,11 @@ apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
+apply plugin: 'org.owasp.dependencycheck'
+apply plugin: 'org.cyclonedx.bom'
+apply plugin: 'com.github.spotbugs'
 
 group = 'springio'
-
 
 repositories {
     mavenCentral()
@@ -26,7 +32,6 @@ repositories {
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-web") 
     testCompile("org.springframework.boot:spring-boot-starter-test")
@@ -34,5 +39,61 @@ dependencies {
     implementation 'software.amazon.awssdk:appconfig'
     compile("org.json:json:20200518")
     testImplementation group: 'junit', name: 'junit', version: '4.11'
+    
+    // FindSecBugs for security scanning
+    spotbugsPlugins 'com.h3xstream.findsecbugs:findsecbugs-plugin:1.12.0'
 }
 
+// Configure SpotBugs for SAST
+spotbugs {
+    toolVersion = '4.7.3'
+    ignoreFailures = false
+    effort = 'max'
+    reportLevel = 'low'
+    reportsDir = file("$buildDir/security-reports/spotbugs")
+}
+
+spotbugsMain {
+    reports {
+        xml.enabled = true
+        html.enabled = true
+    }
+}
+
+// Configure OWASP Dependency Check for SCA
+dependencyCheck {
+    formats = ['HTML', 'JSON', 'XML']
+    failBuildOnCVSS = 8
+    suppressionFile = 'dependency-check-suppressions.xml'
+    outputDirectory = "$buildDir/security-reports/dependency-check"
+}
+
+// Configure CycloneDX for SBOM generation
+cyclonedxBom {
+    includeConfigs = ["compile", "implementation", "api", "runtime"]
+    skipConfigs = ["testCompile", "testImplementation", "testApi", "testRuntime"]
+    destination = file("$buildDir/security-reports/sbom")
+    outputFormat = "all"
+    includeBomSerialNumber = true
+}
+
+// Task for running DAST with OWASP ZAP
+task zapScan(type: Exec) {
+    workingDir '.'
+    commandLine 'bash', './run-zap-scan.sh', 'http://localhost:8080'
+}
+
+// Task for comprehensive security scanning
+task securityScan(dependsOn: ['dependencyCheckAnalyze', 'cyclonedxBom', 'spotbugsMain']) {
+    group = 'Security'
+    description = 'Runs all security scanning tools (SAST, SCA, SBOM)'
+}
+
+// Task for generating security reports
+task generateSecurityReports(dependsOn: ['securityScan']) {
+    group = 'Security'
+    description = 'Generates comprehensive security reports'
+    doLast {
+        println "Security reports generated in $buildDir/security-reports/"
+    }
+}

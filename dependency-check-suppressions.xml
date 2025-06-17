@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suppressions xmlns="https://jeremylong.github.io/DependencyCheck/dependency-suppression.1.3.xsd">
+    <!-- Example suppression - uncomment and modify as needed -->
+    <!--
+    <suppress>
+        <notes>Suppress false positive for specific CVE</notes>
+        <cve>CVE-XXXX-XXXX</cve>
+    </suppress>
+    -->
+    
+    <!-- Example suppression by GAV coordinates -->
+    <!--
+    <suppress>
+        <notes>Suppress specific vulnerability for a specific dependency</notes>
+        <gav regex="true">org\.example:library:.*</gav>
+        <cve>CVE-XXXX-XXXX</cve>
+    </suppress>
+    -->
+    
+    <!-- Example suppression for a specific file -->
+    <!--
+    <suppress>
+        <notes>Suppress specific vulnerability for a specific file</notes>
+        <filePath regex="true">.*\/example\.jar</filePath>
+        <cve>CVE-XXXX-XXXX</cve>
+    </suppress>
+    -->
+</suppressions>
