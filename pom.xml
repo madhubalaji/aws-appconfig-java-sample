@@ -83,7 +83,7 @@
         <java.version>1.8</java.version>
         <dependency-check.version>8.4.0</dependency-check.version>
         <cyclonedx.version>2.7.9</cyclonedx.version>
-        <spotbugs.version>4.7.3</spotbugs.version>
+        <spotbugs.version>4.0.4</spotbugs.version>
         <findsecbugs.version>1.12.0</findsecbugs.version>
         <sonar.version>3.9.1.2184</sonar.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
