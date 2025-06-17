@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FindBugsFilter>
+    <!-- Exclude test classes -->
+    <Match>
+        <Class name="~.*\.*Test"/>
+    </Match>
+    <Match>
+        <Class name="~.*\.*Tests"/>
+    </Match>
+    <Match>
+        <Class name="~.*\.*TestCase"/>
+    </Match>
+    <Match>
+        <Package name="~test\..*"/>
+    </Match>
+    
+    <!-- Exclude generated code -->
+    <Match>
+        <Class name="~.*\.*Generated"/>
+    </Match>
+    <Match>
+        <Class name="~.*\.*\$.*"/>
+    </Match>
+    
+    <!-- Exclude specific false positives as needed -->
+    <!-- Add specific exclusions here if you encounter false positives -->
+</FindBugsFilter>

@@ -10,6 +10,27 @@ The Amazon Q Developer Agent for Code Transformation can upgrade the code langua
 
 Refer to Getting Started guide and 3 ways how Amazon Q Developer agent for code transformation accelerates your java upgrades.
 
+## **Security Scanning**
+
+This repository includes comprehensive security scanning capabilities:
+
+- **SAST (Static Application Security Testing)**: Using SpotBugs with FindSecBugs
+- **DAST (Dynamic Application Security Testing)**: Using OWASP ZAP
+- **SCA (Software Composition Analysis)**: Using OWASP Dependency Check
+- **SBOM (Software Bill of Materials)**: Using CycloneDX in both XML and JSON formats
+
+To run all security scans:
+
+```bash
+# Make scripts executable
+chmod +x run-security-scan.sh run-zap-scan.sh
+
+# Run all security scans
+./run-security-scan.sh
+```
+
+For detailed information about security scanning capabilities, see [SECURITY.md](SECURITY.md).
+
 
 ## **Installation Instructions**
 
@@ -158,7 +179,7 @@ Note: Depending on the deployment strategy you selected, this operation might ta
 1. Open [CloudFormation console](https://console.aws.amazon.com/cloudformation/home) and click on “Create stack”, selecting “With new resources” option.
 2. In the next screen, under the “Specify template” section choose “Upload template file“, and provide the file you downloaded from the repo */templates/ecs-cluster.yml.*
 3. Click next, give the stack a name like “ECSCluster-dev“, and choose dev as value for the Environment parameter.Click next, optionally define your tags, and click next again. On the last screen, don’t forget to tick the check box in the “Capabilities” section, and finally click on “Create stack” button.
-	
+        
 ### STEP 3: Clone the code repository, create a Docker container, and publish to Amazon ECR
 
 1. Git clone this [Repository](https://github.com/aws-samples/aws-appconfig-java-sample)
